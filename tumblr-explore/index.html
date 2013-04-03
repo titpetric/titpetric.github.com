@@ -25,7 +25,7 @@
 
 	<div class="row-fluid">
 
-		<form id="form-search" onsubmit="tumblr.get($('#tag').val()); return false;">
+		<form id="form-search" onsubmit="return false;">
 
 		<div class="span4" id="leftcolumn">
 
@@ -42,9 +42,10 @@
 
 			<small>Notes minimum</small>
 			<div class="btn-group">
-				<button class="btn active" id="notes5" onclick="tumblr.setLimit(5);">5 (most posts)</button>
+				<button class="btn" id="notes0" onclick="tumblr.setLimit(0);">0 (all)</button>
+				<button class="btn active" id="notes5" onclick="tumblr.setLimit(5);">5 (most)</button>
 				<button class="btn" id="notes50" onclick="tumblr.setLimit(50);">50 (trending)</button>
-				<button class="btn" id="notes250" onclick="tumblr.setLimit(250);">250 (popular posts)</button>
+				<button class="btn" id="notes250" onclick="tumblr.setLimit(250);">250 (popular)</button>
 			</div>
 
 			<br/>
@@ -74,6 +75,8 @@
 
 <script type="text/javascript">
 var tumblr = {
+	tags_include: [],
+	tags_exclude: [],
 	tag: false,
 	before: false,
 	fetching: false,
@@ -84,6 +87,7 @@ var tumblr = {
 tumblr.setLimit = function(limit)
 {
 	tumblr.clearContents();
+	$('#notes0').removeClass("active");
 	$('#notes5').removeClass("active");
 	$('#notes50').removeClass("active");
 	$('#notes250').removeClass("active");
@@ -96,20 +100,35 @@ tumblr.setLimit = function(limit)
 tumblr.set = function(tag)
 {
 	$('#tag').val(tag);
-	tumblr.tag = false;
 	tumblr.get(tag);
 };
 
 tumblr.get = function(tag)
 {
-	if (tumblr.tag != tag) {
-		tumblr.clearContents();
+	//console.log("get: "+tag);
+	tumblr.tag = false;
+	tumblr.tags_include = [];
+	tumblr.tags_exclude = [];
+	$.each(tag.split(","), function(i,tag) {
+		tag = tag.trim();
+		if (tag.substring(0,1) == "-") {
+			tumblr.tags_exclude.push(tag.substring(1));
+		} else {
+			// one tag to search by
+			if (!tumblr.tag) {
+				tumblr.tag = tag;
+			}
+			tumblr.tags_include.push(tag);
+		}
+	});
+	tumblr.clearContents();
+	if (tumblr.tag) {
 		tumblr.before = false;
-		tumblr.tag = tag;
+		tumblr.finished = false;
 		tumblr.tagCloud = { };
 		tumblr.tagCloudLimit = 1;
+		tumblr.fetch();
 	}
-	tumblr.fetch();
 };
 
 tumblr.getTagCloud = function()
@@ -148,6 +167,7 @@ tumblr.fetch = function()
 	if (tumblr.before) {
 		url += '&before=' + escape(tumblr.before);
 	}
+	//console.log(url);
 	if (!tumblr.fetching) {
 		tumblr.fetching = true;
 		if (!tumblr.before) {
@@ -182,11 +202,15 @@ tumblr.pushItems = function()
 	} else {
 		//console.log($(document).scrollTop()+" "+$(document).height()+" "+$(window).height());
 		$("#leftcolumn").css("padding-top", $(document).scrollTop()+"px");
-		if (tumblr.getQueueHeight() < ($(document).scrollTop()+$(window).height()+40)) {
+		if (!tumblr.finished && tumblr.getQueueHeight() < ($(document).scrollTop()+$(window).height()+40)) {
 			tumblr.fetch();
 			return;
 		}
-		$('#status').hide("slow");
+		if (!tumblr.finished) {
+			$('#status').hide("slow");
+		} else {
+			$('#status').html('You have reached the end of the internet and are likely to be eaten by a grue').show();
+		}
 		if (tumblr.redraw) {
 			$('#tagtitle').text("Related tags for "+tumblr.tag);
 			$('#tagcloud').html('').jQCloud(tumblr.getTagCloud(), { delayedMode: false, shape: "linear" });
@@ -208,18 +232,30 @@ tumblr.clearContents = function() {
 	$('#content3').html('');
 }
 
+tumblr.areTagsIncluded = function(tags) {
+	var retval = true;
+	$.each(tumblr.tags_include, function(j, tagName) {
+		if (retval && jQuery.inArray(tagName, tags)<0) {
+			retval = false;
+		}
+	});
+	return retval;
+}
+
+tumblr.areTagsExcluded = function(tags) {
+	var retval = true;
+	$.each(tumblr.tags_exclude, function(j, tagName) {
+		if (retval && jQuery.inArray(tagName, tags)>=0) {
+			retval = false;
+		}
+	});
+	return retval;
+}
+
 tumblr.getPosts = function(data)
 {
 	var postsAdded = 0;
 	$.each(data.response, function(i, item) {
-		$.each(item.tags, function(j, tagName) {
-			tagName = tagName.toLowerCase();
-			if (!tumblr.tagCloud[tagName]) {
-				tumblr.tagCloud[tagName] = 0;
-			}
-			tumblr.tagCloud[tagName] ++;
-		});
-
 		if (!tumblr.before) {
 			tumblr.before = item.timestamp;
 		} else {
@@ -231,11 +267,21 @@ tumblr.getPosts = function(data)
 			}
 		}
 
-		if (item.note_count > tumblr.limit_notes) {
+		$.each(item.tags, function(j, tagName) {
+			tagName = tagName.toLowerCase();
+			if (!tumblr.tagCloud[tagName]) {
+				tumblr.tagCloud[tagName] = 0;
+			}
+			tumblr.tagCloud[tagName] ++;
+		});
+
+		var include_post = tumblr.areTagsIncluded(item.tags) && tumblr.areTagsExcluded(item.tags);
+
+		if (include_post && item.note_count > tumblr.limit_notes) {
 			if (item.photos && item.photos[0] && item.photos[0].alt_sizes) {
 				$.each(item.photos[0].alt_sizes, function(i, photo) {
 					if (photo.width == 250) {
-						tumblr.items.push({ contents: '<div class="item"><a target="_blank" href="'+item.post_url+'"><img src="'+photo.url+'"/></a><br/>Posted: '+$.format.date(item.timestamp*1000, 'dd/MM/yyyy HH:mm')+', notes: '+item.note_count+'</div>', waitforload: true});
+						tumblr.items.push({ contents: '<div class="item"><a target="_blank" href="'+item.post_url+'"><img src="'+photo.url+'"/></a><br/>Posted: '+$.format.date(item.timestamp*1000, 'dd/MM/yyyy HH:mm')+', notes: '+item.note_count+', tags '+item.tags.join(", ")+'</div>', waitforload: true});
 					}
 				});
 			} else {
@@ -247,16 +293,36 @@ tumblr.getPosts = function(data)
 
 //		console.log(item);
 	});
-	tumblr.fetching = false;
-	if (postsAdded == 0) {
-		tumblr.fetch();
-		return;
+	if ($(data.response).size()==0) {
+		tumblr.finished = true;
+		tumblr.fetching = false;
+	} else {
+		tumblr.fetching = false;
+		if (postsAdded == 0) {
+			tumblr.fetch();
+			return;
+		}
 	}
 	tumblr.pushItems();
 }
 
 $(window).scroll(tumblr.pushItems);
 $(window).resize(tumblr.pushItems);
+
+$(document).ready(initializeCode);
+
+function initializeCode()
+{
+	$('#form-search input').keydown(
+		function (e) {
+			var key = e.charCode ? e.charCode : (e.keyCode ? e.keyCode : 0);
+			if (key == 13) {
+				e.preventDefault();
+				tumblr.get($('#tag').val());
+			}
+		});
+}
+
 
 </script>
 

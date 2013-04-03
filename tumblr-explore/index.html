@@ -171,9 +171,9 @@ tumblr.fetch = function()
 	if (!tumblr.fetching) {
 		tumblr.fetching = true;
 		if (!tumblr.before) {
-			$('#status').html('<img src="img/spinner.gif"/> Loading posts...').show();
+			$('#status').html('<img src="/img/spinner.gif"/> Loading posts...').show();
 		} else {
-			$('#status').html('<img src="img/spinner.gif"/> Loading posts before '+$.format.date(tumblr.before*1000, 'dd/MM/yyyy HH:mm')+'...').show();
+			$('#status').html('<img src="/img/spinner.gif"/> Loading posts before '+$.format.date(tumblr.before*1000, 'dd/MM/yyyy HH:mm')+'...').show();
 		}
 		$.getJSON(url, { format: 'json'}).done( tumblr.getPosts );
 	}

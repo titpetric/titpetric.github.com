@@ -131,6 +131,16 @@ tumblr.get = function(tag)
 	}
 };
 
+tumblr.linkTag = function(tag)
+{
+	return "javascript:tumblr.set('"+tag+"');";
+}
+
+tumblr.htmlTag = function(tag)
+{
+	return '<a href="'+tumblr.linkTag(tag)+'">'+tag+'</a>';
+}
+
 tumblr.getTagCloud = function()
 {
 	var tagCloud = [];
@@ -209,7 +219,7 @@ tumblr.pushItems = function()
 		if (!tumblr.finished) {
 			$('#status').hide("slow");
 		} else {
-			$('#status').html('You have reached the end of the internet and are likely to be eaten by a grue').show();
+			$('#status').html('You have reached the end of the internet<br/>The internet began at '+$.format.date(tumblr.before*1000, 'dd/MM/yyyy HH:mm')+'<br/>You are likely to be eaten by a grue').show();
 		}
 		if (tumblr.redraw) {
 			$('#tagtitle').text("Related tags for "+tumblr.tag);
@@ -256,15 +266,20 @@ tumblr.getPosts = function(data)
 {
 	var postsAdded = 0;
 	$.each(data.response, function(i, item) {
+		var real_timestamp = item.timestamp;
+		if (item.featured_timestamp) {
+			real_timestamp = item.featured_timestamp;
+		}
+
 		if (!tumblr.before) {
-			tumblr.before = item.timestamp;
+			tumblr.before = real_timestamp;
 		} else {
 			// cludge due to some api issues
-			if ((tumblr.before - item.timestamp) < 86400) {
-				if (item.timestamp < tumblr.before) {
-					tumblr.before = item.timestamp;
+			// if ((tumblr.before - real_timestamp) < 86400) {
+				if (real_timestamp < tumblr.before) {
+					tumblr.before = real_timestamp;
 				}
-			}
+			// }
 		}
 
 		var tags_lower = [];
@@ -280,11 +295,12 @@ tumblr.getPosts = function(data)
 
 		var include_post = tumblr.areTagsIncluded(tags_lower) && tumblr.areTagsExcluded(tags_lower);
 
-		if (include_post && item.note_count > tumblr.limit_notes) {
+		if (include_post && item.note_count >= tumblr.limit_notes) {
+			tags_lower = $.map(tags_lower, tumblr.htmlTag);
 			if (item.photos && item.photos[0] && item.photos[0].alt_sizes) {
 				$.each(item.photos[0].alt_sizes, function(i, photo) {
 					if (photo.width == 250) {
-						tumblr.items.push({ contents: '<div class="item"><a target="_blank" href="'+item.post_url+'"><img src="'+photo.url+'"/></a><br/>Posted: '+$.format.date(item.timestamp*1000, 'dd/MM/yyyy HH:mm')+', notes: '+item.note_count+', tags '+item.tags.join(", ")+'</div>', waitforload: true});
+						tumblr.items.push({ contents: '<div class="item"><a target="_blank" href="'+item.post_url+'"><img src="'+photo.url+'"/></a><br/>Posted: '+$.format.date(real_timestamp*1000, 'dd/MM/yyyy HH:mm')+', notes: '+item.note_count+', tags '+tags_lower.join(", ")+'</div>', waitforload: true});
 					}
 				});
 			} else {
@@ -296,7 +312,7 @@ tumblr.getPosts = function(data)
 
 //		console.log(item);
 	});
-	if ($(data.response).size()==0) {
+	if ($(data.response).size()<20) {
 		tumblr.finished = true;
 		tumblr.fetching = false;
 	} else {

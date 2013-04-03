@@ -110,7 +110,7 @@ tumblr.get = function(tag)
 	tumblr.tags_include = [];
 	tumblr.tags_exclude = [];
 	$.each(tag.split(","), function(i,tag) {
-		tag = tag.trim();
+		tag = tag.trim().toLowerCase();
 		if (tag.substring(0,1) == "-") {
 			tumblr.tags_exclude.push(tag.substring(1));
 		} else {
@@ -267,15 +267,18 @@ tumblr.getPosts = function(data)
 			}
 		}
 
+		var tags_lower = [];
+
 		$.each(item.tags, function(j, tagName) {
 			tagName = tagName.toLowerCase();
+			tags_lower.push(tagName);
 			if (!tumblr.tagCloud[tagName]) {
 				tumblr.tagCloud[tagName] = 0;
 			}
 			tumblr.tagCloud[tagName] ++;
 		});
 
-		var include_post = tumblr.areTagsIncluded(item.tags) && tumblr.areTagsExcluded(item.tags);
+		var include_post = tumblr.areTagsIncluded(tags_lower) && tumblr.areTagsExcluded(tags_lower);
 
 		if (include_post && item.note_count > tumblr.limit_notes) {
 			if (item.photos && item.photos[0] && item.photos[0].alt_sizes) {

@@ -94,7 +94,7 @@ tumblr.setLimit = function(limit)
 	$('#notes'+limit).addClass("active");
 	tumblr.limit_notes = limit;
 	tumblr.before = false;
-	tumblr.fetch();
+	tumblr.get($('#tag').val());
 };
 
 tumblr.set = function(tag)

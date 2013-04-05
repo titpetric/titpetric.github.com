@@ -195,6 +195,9 @@ tumblr.items = [];
 
 tumblr.pushItems = function()
 {
+	if (tumblr.fetching) {
+		return;
+	}
 	if ($(tumblr.items).size()) {
 		var item = tumblr.items.pop();
 		var destination = "#content1";

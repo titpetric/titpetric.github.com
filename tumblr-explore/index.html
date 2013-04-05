@@ -316,9 +316,11 @@ tumblr.getPosts = function(data)
 				var content_html = '';
 				content_html += '<div class="item text">';
 				if (item.title) {
-					content_html += '<a target="_blank" href="'+item.post_url+'">'+item.title+'</a><br/>';
+					content_html += '<a style="font-weight: bold;" target="_blank" href="'+item.post_url+'">'+item.title+'</a><br/>';
 				}
-				content_html += '<div class="body">' + item.body + '</div>';
+				if (item.body) {
+					content_html += '<div class="body">' + item.body + '</div>';
+				}
 				content_html += 'Posted: '+item_link+', notes: '+item.note_count+', tags '+tags_lower.join(", ");
 				content_html += '</div>';
 				tumblr.items.push({ contents: content_html});

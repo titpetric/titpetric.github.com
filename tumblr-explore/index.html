@@ -319,7 +319,7 @@ tumblr.getPosts = function(data)
 					content_html += '<a target="_blank" href="'+item.post_url+'">'+item.title+'</a><br/>';
 				}
 				content_html += '<div class="body">' + item.body + '</div>';
-				content_html += '<br/>Posted: '+item_link+', notes: '+item.note_count+', tags '+tags_lower.join(", ");
+				content_html += 'Posted: '+item_link+', notes: '+item.note_count+', tags '+tags_lower.join(", ");
 				content_html += '</div>';
 				tumblr.items.push({ contents: content_html});
 				// console.log(item);

@@ -17,6 +17,8 @@
 		margin: 3px;
 		padding: 5px;
 		}
+
+	.text .body { max-height: 200px; overflow: hidden; background: #fff; border: 1px solid #999; font-size: 80%; padding: 3px; }
 	</style>
 </head>
 <body>
@@ -297,14 +299,30 @@ tumblr.getPosts = function(data)
 
 		if (include_post && item.note_count >= tumblr.limit_notes) {
 			tags_lower = $.map(tags_lower, tumblr.htmlTag);
+			var item_link = '<a target="_blank" href="'+item.post_url+'">' + $.format.date(real_timestamp*1000, 'dd/MM/yyyy HH:mm') + '</a>';
 			if (item.photos && item.photos[0] && item.photos[0].alt_sizes) {
 				$.each(item.photos[0].alt_sizes, function(i, photo) {
 					if (photo.width == 250) {
-						tumblr.items.push({ contents: '<div class="item"><a target="_blank" href="'+item.post_url+'"><img src="'+photo.url+'"/></a><br/>Posted: '+$.format.date(real_timestamp*1000, 'dd/MM/yyyy HH:mm')+', notes: '+item.note_count+', tags '+tags_lower.join(", ")+'</div>', waitforload: true});
+						tumblr.items.push({ contents: '<div class="item"><a target="_blank" href="'+item.post_url+'"><img src="'+photo.url+'"/></a><br/>Posted: '+item_link+', notes: '+item.note_count+', tags '+tags_lower.join(", ")+'</div>', waitforload: true});
+					}
+				});
+			} else if ($(item.player).size()>0) {
+				$.each(item.player, function(i, video) {
+					if (video.width == 250) {
+						tumblr.items.push({ contents: '<div class="item">'+video.embed_code+'<br/>Posted: '+item_link+', notes: '+item.note_count+', tags '+tags_lower.join(", ")+'</div>'});
 					}
 				});
 			} else {
-				tumblr.items.push({ contents: '<div class="item text"><a target="_blank" href="'+item.post_url+'">text post</a></div>'});
+				var content_html = '';
+				content_html += '<div class="item text">';
+				if (item.title) {
+					content_html += '<a target="_blank" href="'+item.post_url+'">'+item.title+'</a><br/>';
+				}
+				content_html += '<div class="body">' + item.body + '</div>';
+				content_html += '<br/>Posted: '+item_link+', notes: '+item.note_count+', tags '+tags_lower.join(", ");
+				content_html += '</div>';
+				tumblr.items.push({ contents: content_html});
+				// console.log(item);
 			}
 			tumblr.redraw = true;
 			postsAdded ++;

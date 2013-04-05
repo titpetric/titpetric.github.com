@@ -271,6 +271,9 @@ tumblr.getPosts = function(data)
 {
 	var postsAdded = 0;
 	$.each(data.response, function(i, item) {
+
+		// console.log(item);
+
 		var real_timestamp = item.timestamp;
 		if (item.featured_timestamp) {
 			real_timestamp = item.featured_timestamp;
@@ -297,6 +300,11 @@ tumblr.getPosts = function(data)
 			}
 			tumblr.tagCloud[tagName] ++;
 		});
+
+		// cludge for audio player
+		if (typeof item.player === 'string') {
+			item.player = [{ width: 250, embed_code: item.player }];
+		}
 
 		var include_post = tumblr.areTagsIncluded(tags_lower) && tumblr.areTagsExcluded(tags_lower);
 
@@ -332,8 +340,6 @@ tumblr.getPosts = function(data)
 			tumblr.redraw = true;
 			postsAdded ++;
 		}
-
-//		console.log(item);
 	});
 	if ($(data.response).size()<20) {
 		tumblr.finished = true;

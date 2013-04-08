@@ -195,6 +195,7 @@ tumblr.items = [];
 
 tumblr.pushItems = function()
 {
+	$("#leftcolumn").css("padding-top", $(document).scrollTop()+"px");
 	if (tumblr.fetching) {
 		return;
 	}
@@ -216,7 +217,6 @@ tumblr.pushItems = function()
 		}
 	} else {
 		//console.log($(document).scrollTop()+" "+$(document).height()+" "+$(window).height());
-		$("#leftcolumn").css("padding-top", $(document).scrollTop()+"px");
 		if (!tumblr.finished && tumblr.getQueueHeight() < ($(document).scrollTop()+$(window).height()+40)) {
 			tumblr.fetch();
 			return;
@@ -331,6 +331,14 @@ tumblr.getPosts = function(data)
 				}
 				if (item.body) {
 					content_html += '<div class="body">' + item.body + '</div>';
+				}
+				if (item.text) {
+					content_html += '<div class="body">';
+					content_html += '&quot;' + item.text + '&quot;';
+					if (item.source) {
+						content_html += '<br/>' + item.source;
+					}
+					content_html += '</div>';
 				}
 				content_html += 'Posted: '+item_link+', notes: '+item.note_count+', tags '+tags_lower.join(", ");
 				content_html += '</div>';

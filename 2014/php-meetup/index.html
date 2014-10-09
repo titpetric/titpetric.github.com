@@ -8,8 +8,24 @@
 	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
 	<style>
 	.shout h2 { text-align: center; }
-	#inspiration blockquote+figcaption {
+	.inspiration blockquote+figcaption {
 		margin: -50px 0 20px;
+	}
+	.slide.cover img {
+		width: 100%;
+	}
+	small, small a {
+		color: #fff;
+		text-shadow: 0 0 3px #000;
+	}
+	.tinycode pre {
+		font-size: 13px;
+	}
+	.longcode pre {
+		font-size: 20px;
+	}
+	.longcode p {
+		margin: 0;
 	}
 	</style>
 </head>
@@ -34,7 +50,7 @@
 				color:#FFF;
 				text-align:center;
 				font-size:96px;
-				text-shadow: 1px 5px 5px #000;
+				text-shadow: 0px 0px 15px #000;
 				}
 			#Cover p {
 				margin:10px 0 0;
@@ -42,7 +58,7 @@
 				color:#fefdfc !important;
 				font-style:italic;
 				font-size:32px;
-				text-shadow: 1px 3px 3px #000;
+				text-shadow: 0px 0px 10px #000;
 				}
 				#Cover p a {
 					background: none !important;
@@ -64,6 +80,7 @@
 			<li>PHP 12 let, MySQL DBA, MSSQL Certified, Java, Javascript, LUA</li>
 			<li>CMS sistem, API, infrastruktura @ MMC RTV Slovenija</li>
 			<li>CRM sistem za upravljanje s strankami @ Klub Lekarne</li>
+			<li>LinkedIn - https://www.linkedin.com/in/titpetric</li>
 			<li>Open Source - https://github.com/titpetric</li>
 			<li>Tech blog - http://foreach.org/tagged/titpetric</li>
 		</ul>
@@ -83,16 +100,15 @@
 			<li>Veliko paketov na voljo preko packagist.org</li>
 			<li>Delno rešuje zablode PEAR/PECL*</li>
 		</ul>
-		<p class="note">* tako npm kot rubygems sta daleč naprej po uporabi</p>
+		<p class="note">* tako npm kot rubygems sta daleč naprej po nastanku in uporabi</p>
 	</div></section>
 
 	<section class="slide"><div>
 		<h2>Implementacija composer paketov</h2>
 		<ul>
 			<li>PSR je zakon! Samo 10 let prepozno,...</li>
-			<li>Roll your own package manager (composer-sentinel)</li>
+			<li>Roll your own packages (composer-sentinel, packagist, ...)</li>
 			<li>Privatni repository za pakete</li>
-			<li>Composer nima "hard" zahtev &amp; omejitev</li>
 		</ul>
 	</div></section>
 
@@ -103,37 +119,159 @@
 	<section class="slide"><div>
 		<h2>Na kaj paziti pri APIjih?</h2>
 		<ul>
-			<li>Ne podvajamo kode - različni izpisi isti vir podatkov!</li>
-			<li>Dokumentacija (specifikacija, zahtevki, odgovori, uporaba)</li>
-			<li>Tracking web odjemalcev (client ID, OAuth,...)
-			<li>Statistika API klicev</li>
-			<li>Caching API klicev (nginx + lua + redis)</li>
+			<li>Ne podvajamo kode</li>
+			<li>Idealno je SDK/Framework dejansko tudi API</li>
+			<li>Dokumentacija</li>
 		</ul>
 	</div></section>
 
-	<section class="slide" id="inspiration"><div>
+	<section class="slide inspiration"><div>
 		<h2>Vzor in inspiracija</h2>
 		<figure>
 			<blockquote>
 				<p>JSON Schema, describes your JSON data format.</p>
 			</blockquote>
-			<figcaption>json-schema.org</figcaption>
+			<figcaption>JSON Schema - json-schema.org</figcaption>
 		</figure>
 		<figure>
 			<blockquote>
 				<p>Swagger is a simple yet powerful representation of your RESTful API.</p>
 			</blockquote>
-			<figcaption>http://swagger.io</figcaption>
+			<figcaption>Swagger - http://swagger.io</figcaption>
 		</figure>
 		<figure>
 			<blockquote>
 				<p>Collaborative design, instant API mock, generated documentation, integrated code samples, debugging and automated testing.</p>
 			</blockquote>
-			<figcaption>http://apiary.io</figcaption>
+			<figcaption>Apiary - http://apiary.io</figcaption>
 		</figure>
 	</div></section>
 
+	<section class="slide inspiration"><div>
+		<h2>Vzor in inspiracija</h2>
+		<figure>
+			<blockquote>
+				<p>There isn't anything we enjoy more than seeing talented designers and engineers using Tumblr to invent whole new forms of creative expression.</p>
+			</blockquote>
+			<figcaption>Tumblr - https://www.tumblr.com/docs/en/api/v2</figcaption>
+		</figure>
+		<figure>
+			<blockquote>
+				<p>OVH API is a Web service allowing OVH customers to buy, manage, upgrade and configure OVH products without using the graphical customer interface (OVH manager).</p>
+			</blockquote>
+			<figcaption>OVH - https://api.ovh.com/console/</figcaption>
+		</figure>
+	</div></section>
 
+	<section class="slide shout"><div>
+		<h2>Composer paket kot API v praksi</h2>
+	</div></section>
+
+
+	<section class="slide tinycode"><div>
+	<h2>API Shema</h2>
+	<pre>
+<code>{</code>
+<code>	"interface": "News",</code>
+<code>	"title": "News API",</code>
+<code>	"protocol": "http",</code>
+<code>	"type": "private",</code>
+<code>	"path": "/news",</code>
+<code>	"auth": ["client"],</code>
+<code>	"errors": {</code>
+<code>		"E_HTTPS": "Call must to be delivered over HTTPS."</code>
+<code>	},</code>
+<code>	"apis": {</code>
+<code>		"getLayouts": {</code>
+<code>			"method": "GET",</code>
+<code>			"icon": "check",</code>
+<code>			"path": "/news/getLayouts",</code>
+<code>			"title": "Get layout names"</code>
+<code>		}, ...</code></pre>
+		</div></section>
+
+	<section class="slide"><div>
+		<h2>Composer paket kot API: v praksi</h2>
+		<ul>
+			<li>JSON SHEMA je edini pravi vir podatkov</li>
+			<li>Generiramo:
+			<ol>
+				<li>Testno konzolo (api.rtvslo.si/console)</li>
+				<li>Dokumentacijo (api.rtvslo.si/console/docs)</li>
+				<li>Dejanski primeri v dokumentaciji so generirani in ne fikcija</li>
+				<li>PHP "routing" in interface za implementacijo, docbook komentarje</li>
+				<li>Javascript odjemalce za razne projekte</li>
+			</ol>
+			</li>
+			<li>Interna uporaba APIjev je identična ostalim composer paketom</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Composer paket kot API</h2>
+		<ul>
+		<li>Pomankljivosti zaradi PHPja
+		<ul>
+			<li>Ne podpiramo korektnih HTTP verb apijev (GET/POST)</li>
+			<li>Ne delamo globalnega verzioniranja (v1, v2,...)</li>
+		</ul>
+		</li>
+		<li>Prednosti HTTP glede na PHP uporabo
+		<ul>
+			<li>Avtomatski "tracking" API klicev (Client ID)</li>
+			<li>Statisticna obdelava klicev (stevilo, hitrost, vir)
+			<ul><li>api.rtvslo.si/status</li></ul></li>
+		</ul>
+		</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Composer paket kot API</h2>
+		<ul>
+		<li>Napredno stanje
+		<ul>
+			<li>Nginx + LUA + Redis (klici &lt;1ms)</li>
+			<li>Nekateri klici izključno PHP server-side (mail/create)</li>
+			<li>Nekateri klici imajo ločeno 100% LUA implementacijo</li>
+			<li>Scaling je skoraj 0 effort (vse je v composer paketu!)</li>
+		</ul>
+		</li>
+		</ul>
+	</div></section>
+
+	<section class="slide longcode"><div>
+		<h2>Dodajanje parametrov</h2>
+		<pre>
+		<code>$api = new MMC\API\Providers\News;</code>
+		<code>$api-&gt;getSearch($q, $prepare, $pageNumber, $pageSize);</code>
+		</pre>
+
+		<pre>
+		<code>$api = new MMC\API\Providers\News;</code>
+		<code>$api-&gt;getSearch($q, <mark class="important">$section,</mark> $prepare, $pageNumber, $pageSize);</code>
+		</pre>
+
+		<p>Trajno delovanje</p>
+		<pre>
+		<code>$api = new MMC\API\<mark>Endpoints</mark>\News;</code>
+		<code>$api-&gt;<mark class="comment">post</mark>("getSearch", compact("q", "prepare", "language"));</code>
+		</pre>
+
+		<ul>
+		<li>
+		<ul>
+			<li>Nginx + LUA + Redis (klici &lt;1ms)</li>
+			<li>Nekateri klici izključno PHP server-side (mail/create)</li>
+			<li>Nekateri klici imajo ločeno 100% LUA implementacijo</li>
+			<li>Scaling je skoraj 0 effort (vse je v composer paketu!)</li>
+		</ul>
+		</li>
+		</ul>
+	</div></section>
+
+
+<!--
 
 	<section class="slide"><div>
 		<h2>Plain Text on Your Slides</h2>
@@ -213,7 +351,7 @@
 		<p>It’s good to have information organized.</p>
 	</div></section>
 	<section class="slide cover" id="Picture"><div>
-		<h2>Pictures</h2>
+		<h2>API monitoring</h2>
 		<img src="pictures/picture.jpg" alt="">
 		<style>
 			#Picture h2 {
@@ -221,9 +359,25 @@
 				}
 		</style>
 	</div></section>
-	<section class="slide shout"><div>
-		<h2>You can even shout this way</h2>
+
+-->
+
+	<section class="slide longcode"><div>
+		<h2>Vas zanimajo RTVSLO API-ji?</h2>
+		<p>Pošljite naslednje podatke na mmc@rtvslo.si</p>
+		<ul>
+			<li>Vaše ime / kontakt podjetja</li>
+			<li>Opis projekta pri katerem bi uporabljali API-je</li>
+			<li>Kateri APIji vas zanimajo?</li>
+		</ul>
+		<p class="note">Lahko pa predlagate tudi kak nov API, ki bi ga radi imeli</p>
+
 	</div></section>
+
+	<section class="slide shout"><div>
+		<h2>Vprašanja?</h2>
+	</div></section>
+<!--
 	<section class="slide"><div>
 		<h2>Inner Navigation</h2>
 		<ol>
@@ -249,6 +403,8 @@
 				}
 		</style>
 	</div></section>
+
+	-->
 	<!--
 		To hide progress bar from entire presentation
 		just remove “progress” element.

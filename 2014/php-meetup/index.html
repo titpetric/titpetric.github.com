@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Shower Presentation Engine</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<style>
+	.shout h2 { text-align: center; }
+	#inspiration blockquote+figcaption {
+		margin: -50px 0 20px;
+	}
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Composer in API-ji</h1>
+		<p><a href="http://twitter.com/TitPetric">Tit Petrič, Monotek d.o.o.</a></p>
+	</header>
+	<section class="slide cover" id="Cover"><div>
+		<h2>Composer in API-ji</h2>
+		<p><a href="http://twitter.com/TitPetric">Tit Petrič (@TitPetric)</a></p>
+		<img src="pictures/cover.jpg" alt="">
+		<small>Photo &copy; <a href="https://www.flickr.com/photos/jeffreybass/">Jeffrey Bass @ Flickr</a></small>
+		<!--
+			To apply styles to the certain slides
+			set slide ID to get needed elements
+			-->
+		<style>
+			#Cover h2 {
+				color: #f0fef0 !important;
+				margin:60px 0 0;
+				color:#FFF;
+				text-align:center;
+				font-size:96px;
+				text-shadow: 1px 5px 5px #000;
+				}
+			#Cover p {
+				margin:10px 0 0;
+				text-align:center;
+				color:#fefdfc !important;
+				font-style:italic;
+				font-size:32px;
+				text-shadow: 1px 3px 3px #000;
+				}
+				#Cover p a {
+					background: none !important;
+					color:#FeFdFc !important;
+					text-decoration: none !important;
+					}
+			#Cover small {
+				display: block;
+				margin-top: 250px;
+				text-align: right;
+				font-size: 12px;
+			}
+		</style>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Kdo sem</h2>
+		<ul>
+			<li>PHP 12 let, MySQL DBA, MSSQL Certified, Java, Javascript, LUA</li>
+			<li>CMS sistem, API, infrastruktura @ MMC RTV Slovenija</li>
+			<li>CRM sistem za upravljanje s strankami @ Klub Lekarne</li>
+			<li>Open Source - https://github.com/titpetric</li>
+			<li>Tech blog - http://foreach.org/tagged/titpetric</li>
+		</ul>
+	</div></section>
+
+	<section class="slide shout"><div>
+		<h2>Composer</h2>
+	</div></section>
+
+
+	<section class="slide"><div>
+		<h2>Zakaj composer?</h2>
+		<ul>
+			<li>Standardni problemi glede deljene uporabe kode</li>
+			<li>Update mehanizem - vedno najnovejša koda</li>
+			<li>Odprtokodni projekt z dobro dokumentacijo</li>
+			<li>Veliko paketov na voljo preko packagist.org</li>
+			<li>Delno rešuje zablode PEAR/PECL*</li>
+		</ul>
+		<p class="note">* tako npm kot rubygems sta daleč naprej po uporabi</p>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Implementacija composer paketov</h2>
+		<ul>
+			<li>PSR je zakon! Samo 10 let prepozno,...</li>
+			<li>Roll your own package manager (composer-sentinel)</li>
+			<li>Privatni repository za pakete</li>
+			<li>Composer nima "hard" zahtev &amp; omejitev</li>
+		</ul>
+	</div></section>
+
+	<section class="slide shout"><div>
+		<h2>API-ji</h2>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Na kaj paziti pri APIjih?</h2>
+		<ul>
+			<li>Ne podvajamo kode - različni izpisi isti vir podatkov!</li>
+			<li>Dokumentacija (specifikacija, zahtevki, odgovori, uporaba)</li>
+			<li>Tracking web odjemalcev (client ID, OAuth,...)
+			<li>Statistika API klicev</li>
+			<li>Caching API klicev (nginx + lua + redis)</li>
+		</ul>
+	</div></section>
+
+	<section class="slide" id="inspiration"><div>
+		<h2>Vzor in inspiracija</h2>
+		<figure>
+			<blockquote>
+				<p>JSON Schema, describes your JSON data format.</p>
+			</blockquote>
+			<figcaption>json-schema.org</figcaption>
+		</figure>
+		<figure>
+			<blockquote>
+				<p>Swagger is a simple yet powerful representation of your RESTful API.</p>
+			</blockquote>
+			<figcaption>http://swagger.io</figcaption>
+		</figure>
+		<figure>
+			<blockquote>
+				<p>Collaborative design, instant API mock, generated documentation, integrated code samples, debugging and automated testing.</p>
+			</blockquote>
+			<figcaption>http://apiary.io</figcaption>
+		</figure>
+	</div></section>
+
+
+
+	<section class="slide"><div>
+		<h2>Plain Text on Your Slides</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur <a href="#4">adipisicing</a> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <em>quis nostrud</em> exercitation ullamco laboris <strong>nisi ut aliquip</strong> ex ea commodo consequat. Duis aute irure <i>dolor</i> in reprehenderit in voluptate velit esse cillum <b>dolore</b> eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in <code>&lt;culpa&gt;</code> qui officia deserunt mollit anim id est laborum.</p>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>All Kind of Lists</h2>
+		<ol>
+			<li>Simple lists are marked with bullets</li>
+			<li>Ordered lists begin with a number</li>
+			<li>You can even nest lists one inside another
+				<ul>
+					<li>Or mix their types</li>
+					<li>But do not go too far</li>
+					<li>Otherwise audience will be bored</li>
+				</ul>
+			</li>
+			<li>Look, seven rows exactly!</li>
+		</ol>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Serious Citations</h2>
+		<figure>
+			<blockquote>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
+			</blockquote>
+			<figcaption>Marcus Tullius Cicero</figcaption>
+		</figure>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Code Samples</h2>
+		<pre>
+			<code>&lt;!DOCTYPE html&gt;</code>
+			<code>&lt;html lang="en"&gt;</code>
+			<code><mark>&lt;head&gt;</mark> <mark class="comment">&lt;!--Comment--&gt;</mark></code>
+			<code>    &lt;title&gt;Shower&lt;/title&gt;</code>
+			<code>    &lt;meta charset="<mark class="important">UTF-8</mark>"&gt;</code>
+			<code>    &lt;link rel="stylesheet" href="screen.css"&gt;</code>
+			<code><mark>&lt;/head&gt;</mark></code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Even Tables</h2>
+		<table>
+		<tr>
+			<th scope="col">Locavore</th>
+			<th>Umami</th>
+			<th>Helvetica</th>
+			<th>Vegan</th>
+		</tr>
+		<tr>
+			<th scope="row">Fingerstache</th>
+			<td>Kale</td>
+			<td>Chips</td>
+			<td>Keytar</td>
+		</tr>
+		<tr>
+			<th scope="row">Sriracha</th>
+			<td>Gluten-free</td>
+			<td>Ennui</td>
+			<td>Keffiyeh</td>
+		</tr>
+		<tr>
+			<th scope="row">Thundercats</th>
+			<td>Jean</td>
+			<td>Shorts</td>
+			<td>Biodiesel</td>
+		</tr>
+		<tr>
+			<th scope="row">Terry</th>
+			<td>Richardson</td>
+			<td>Swag</td>
+			<td>Blog</td>
+		</tr>
+		</table>
+		<p>It’s good to have information organized.</p>
+	</div></section>
+	<section class="slide cover" id="Picture"><div>
+		<h2>Pictures</h2>
+		<img src="pictures/picture.jpg" alt="">
+		<style>
+			#Picture h2 {
+				color:#FFF;
+				}
+		</style>
+	</div></section>
+	<section class="slide shout"><div>
+		<h2>You can even shout this way</h2>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Inner Navigation</h2>
+		<ol>
+			<li>Lets you reveal list items one by one</li>
+			<li class="next">To keep some key points</li>
+			<li class="next">In secret from audience</li>
+			<li class="next">But it will work only once</li>
+			<li class="next">Nobody wants to see the same joke twice</li>
+		</ol>
+	</div></section>
+	<section class="slide shout" id="SeeMore"><div>
+		<h2><img src="pictures/logo.svg" alt=""> <a href="https://github.com/shower/shower">See more on GitHub</a></h2>
+		<style>
+			#Picture h2 {
+				color:#FFF;
+				}
+			#SeeMore h2 {
+				font-size:100px
+				}
+			#SeeMore img {
+				width:0.72em;
+				height:0.72em;
+				}
+		</style>
+	</div></section>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2014 Yours Truly, Famous Inc. -->
+	<!-- Photos by John Carey, fiftyfootshadows.net -->
+</body>
+</html>

@@ -7,7 +7,7 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
 	<style>
-	.shout h2 { text-align: center; }
+	.slide.shout h2 { text-align: center; font-size: 120px; }
 	.inspiration blockquote+figcaption {
 		margin: -50px 0 20px;
 	}
@@ -23,6 +23,7 @@
 	}
 	.longcode pre {
 		font-size: 20px;
+		margin-bottom: 15px;
 	}
 	.longcode p {
 		margin: 0;
@@ -164,7 +165,7 @@
 	</div></section>
 
 	<section class="slide shout"><div>
-		<h2>Composer paket kot API v praksi</h2>
+		<h2>Composer paket<br/>kot API</h2>
 	</div></section>
 
 
@@ -258,16 +259,6 @@
 		<code>$api-&gt;<mark class="comment">post</mark>("getSearch", compact("q", "prepare", "language"));</code>
 		</pre>
 
-		<ul>
-		<li>
-		<ul>
-			<li>Nginx + LUA + Redis (klici &lt;1ms)</li>
-			<li>Nekateri klici izključno PHP server-side (mail/create)</li>
-			<li>Nekateri klici imajo ločeno 100% LUA implementacijo</li>
-			<li>Scaling je skoraj 0 effort (vse je v composer paketu!)</li>
-		</ul>
-		</li>
-		</ul>
 	</div></section>
 
 

@@ -1,0 +1,516 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Shower Presentation Engine</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<style>
+	.slide.shout h2 { text-align: center; font-size: 120px; }
+	.inspiration blockquote+figcaption {
+		margin: -50px 0 20px;
+	}
+	.slide.cover img {
+		width: 100%;
+	}
+	small, small a {
+		color: #fff;
+		text-shadow: 0 0 3px #000;
+	}
+	.tinycode pre {
+		font-size: 13px;
+	}
+	.longcode pre {
+		font-size: 20px;
+		margin-bottom: 15px;
+	}
+	.longcode p {
+		margin: 0;
+	}
+
+	.slide {
+		position: relative;
+	}
+	.growth {
+		background: #000 url(pictures/growth.jpg) 50% 50% no-repeat;
+		background-size: contain;
+	}
+	.slide.shout.growth h2 {
+		top: 30%;
+		color: #333;
+		font-size: 50px;
+	}
+	.floater {
+		background: #116AA4 url('pictures/cover.jpg') 50% 50% no-repeat;
+		background-size: cover;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+	.floater p {
+		margin: 0 0 10px 0;
+		padding: 10px 0 10px 120px;
+		color: #ccc;
+		line-height: 1.42;
+	}
+	.list .floater p {
+		margin-bottom: 0;
+	}
+	.floater a, .floater a:hover {
+		color: #fff;
+	}
+
+	.caption h1 {
+		text-shadow: 0 0 5px #000;
+		color: #fff;
+	}
+	.caption a {
+		color: #ccc;
+		text-shadow: 0 0 3px #000;
+	}
+
+	.quote-single figure {
+		width: 80%;
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+
+	.quote-single blockquote p {
+		font-size: 36px;
+		line-height: 1.2;
+		padding-bottom: 30px;
+		margin-top: 100px;
+	}
+	.quote-single figcaption {
+		text-align: right;
+	}
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Open Source @ MMC RTV Slovenija</h1>
+		<p><a href="http://twitter.com/TitPetric">Tit Petrič, Monotek d.o.o.</a></p>
+	</header>
+	<section class="slide cover" id="Cover"><div>
+		<h2>Open Source @<br/>MMC RTV Slovenija</h2>
+		<p><a href="http://twitter.com/TitPetric">Tit Petrič (@TitPetric)</a></p>
+		<img src="pictures/cover.jpg" alt="">
+		<small>Photo &copy; <a href="https://www.flickr.com/photos/jeffreybass/">Jeffrey Bass @ Flickr</a></small>
+		<!--
+			To apply styles to the certain slides
+			set slide ID to get needed elements
+			-->
+		<style>
+			#Cover h2 {
+				color: #f0fef0 !important;
+				margin:60px 0 0;
+				color:#FFF;
+				text-align:center;
+				font-size:96px;
+				text-shadow: 0px 0px 15px #000;
+				}
+			#Cover p {
+				margin:10px 0 0;
+				text-align:center;
+				color:#fefdfc !important;
+				font-style:italic;
+				font-size:32px;
+				text-shadow: 0px 0px 10px #000;
+				}
+				#Cover p a {
+					background: none !important;
+					color:#FeFdFc !important;
+					text-decoration: none !important;
+					}
+			#Cover small {
+				display: block;
+				margin-top: 250px;
+				text-align: right;
+				font-size: 12px;
+			}
+		</style>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Kdo sem</h2>
+		<ul>
+			<li>PHP 12+ let, MySQL DBA, MSSQL Certified, Java, Javascript, LUA</li>
+			<li>Co-founder @ Monotek d.o.o.</li>
+			<li>CMS sistem, API, infrastruktura @ MMC RTV Slovenija</li>
+			<li>CRM sistem za upravljanje s strankami @ Klub Lekarne</li>
+			<li>LinkedIn - https://www.linkedin.com/in/titpetric</li>
+			<li>Open Source - https://github.com/titpetric</li>
+			<!-- <li>Tech blog - http://foreach.org/tagged/titpetric</li> -->
+		</ul>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div>
+	</section>
+
+	<section class="slide"><div>
+		<h2>Moji začetki</h2>
+		<ul>
+			<li>Watcom C/C++, assembler (1997-2000)</li>
+			<li>Visual studio C++ (2000-2001)</li>
+			<li>Močan poudarek na optimizaciji in DIY</li>
+			<li>Prvi stik z Slackware Linux v '98</li>
+			<li>In pride LAMP (linux, apache, mysql, php)*</li>
+		</ul>
+		<p class="note">* prvi projekti še v 1999</p>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+	<section class="slide shout"><div>
+		<h2>MMC RTV SLO</h2>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>MMC RTVSLO 2003</h2>
+		<ul>
+			<li>Do tega trenutka je bil portal na "Oracle Web Forms"</li>
+			<li>Počasnost rešitve (optimizacija)</li>
+			<li>Drage prilagoditve (specifična znanja)</li>
+			<li>"Zaprt ekosistem"</li>
+			<li>Skromni začetki s spletnim sistemom oddaj</li>
+		</ul>
+		<p class="note">* število serverjev: 1</p>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>MMC RTVSLO 2003</h2>
+		<div class="wordlist1"></div>
+		<p class="note">* število serverjev: 1</p>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>MMC RTVSLO 2004-2005</h2>
+		<div class="wordlist2"></div>
+		<p class="note">* število serverjev: 2-4</p>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+	<section class="slide shout growth"><div>
+		<h2>Rast obiska, rast infrastrukture</h2>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+	<section class="slide quote-single"><div>
+		<figure>
+			<blockquote>
+				<p>You will either step forward into growth, or you will step backward into safety.</p>
+			</blockquote>
+			<figcaption>Abraham Maslow</figcaption>
+		</figure>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+
+	<section class="slide"><div>
+		<h2>MMC RTVSLO 2005-2008</h2>
+		<div class="wordlist3"></div>
+		<p class="note">* število serverjev: 12</p>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>MMC RTVSLO 2008-2011</h2>
+		<div class="wordlist4"></div>
+		<p class="note">* število serverjev: 20* (30+ virtualnih strežnikov)</p>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>2005 - 2011, pred in po 2008</h2>
+		<ol>
+			<li>Load balancer: DNS -> Pound -> Nginx</li>
+			<li>Web strežniki: Apache -> Lighttpd -> Nginx</li>
+			<li>NoSQL: Memcache / Sharedance -> Redis</li>
+			<li>Uvedba Nginx + LUA za front-end cache</li>
+			<li>Uvedba API arhitekture in CI (git-robot)</li>
+			<li>Stabilizacija rešitev</li>
+		</ol>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>MMC RTVSLO 2011-</h2>
+		<div class="wordlist5"></div>
+		<p class="note">* število serverjev: 6* (60+ virtualnih strežnikov)</p>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Ključne lastnosti Open Source</h2>
+		<ol>
+			<li>Prednost: Odprtost & dostopnost rešitev</li>
+			<li class="next">Prednost: Možnost menjave (web server, load balancer,...)</li>
+			<li class="next">Prednost: Iznajdljivost rešitev (redis vs. memcache)</li>
+			<li class="next">Slabost: Podpora avtorjev na malih projektih</li>
+			<li class="next">Slabost: Velika izbira ne diktira kvalitete</li>
+		</ol>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Kam gre MMC</h2>
+		<ul>
+			<li>Odprtost in dostopnost z API-ji *</li>
+			<li>Validacija novih tehnologij</li>
+			<li>Enterprise rešitve problemov (HA)</li>
+		</ul>
+		<p class="note">* https://api.rtvslo.si/console/docs</p>
+		<div class="floater">
+			<p>Open Source @ MMC RTV Slovenia, by <a href="https://twitter.com/TitPetric">@TitPetric</a> for <a href="https://twitter.com/OpenWaySi">@OpenWaySi</a></p>
+		</div>
+	</div></section>
+
+
+<!--
+
+	<section class="slide"><div>
+		<h2>Plain Text on Your Slides</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur <a href="#4">adipisicing</a> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <em>quis nostrud</em> exercitation ullamco laboris <strong>nisi ut aliquip</strong> ex ea commodo consequat. Duis aute irure <i>dolor</i> in reprehenderit in voluptate velit esse cillum <b>dolore</b> eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in <code>&lt;culpa&gt;</code> qui officia deserunt mollit anim id est laborum.</p>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>All Kind of Lists</h2>
+		<ol>
+			<li>Simple lists are marked with bullets</li>
+			<li>Ordered lists begin with a number</li>
+			<li>You can even nest lists one inside another
+				<ul>
+					<li>Or mix their types</li>
+					<li>But do not go too far</li>
+					<li>Otherwise audience will be bored</li>
+				</ul>
+			</li>
+			<li>Look, seven rows exactly!</li>
+		</ol>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Serious Citations</h2>
+		<figure>
+			<blockquote>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
+			</blockquote>
+			<figcaption>Marcus Tullius Cicero</figcaption>
+		</figure>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Code Samples</h2>
+		<pre>
+			<code>&lt;!DOCTYPE html&gt;</code>
+			<code>&lt;html lang="en"&gt;</code>
+			<code><mark>&lt;head&gt;</mark> <mark class="comment">&lt;!--Comment--&gt;</mark></code>
+			<code>    &lt;title&gt;Shower&lt;/title&gt;</code>
+			<code>    &lt;meta charset="<mark class="important">UTF-8</mark>"&gt;</code>
+			<code>    &lt;link rel="stylesheet" href="screen.css"&gt;</code>
+			<code><mark>&lt;/head&gt;</mark></code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Even Tables</h2>
+		<table>
+		<tr>
+			<th scope="col">Locavore</th>
+			<th>Umami</th>
+			<th>Helvetica</th>
+			<th>Vegan</th>
+		</tr>
+		<tr>
+			<th scope="row">Fingerstache</th>
+			<td>Kale</td>
+			<td>Chips</td>
+			<td>Keytar</td>
+		</tr>
+		<tr>
+			<th scope="row">Sriracha</th>
+			<td>Gluten-free</td>
+			<td>Ennui</td>
+			<td>Keffiyeh</td>
+		</tr>
+		<tr>
+			<th scope="row">Thundercats</th>
+			<td>Jean</td>
+			<td>Shorts</td>
+			<td>Biodiesel</td>
+		</tr>
+		<tr>
+			<th scope="row">Terry</th>
+			<td>Richardson</td>
+			<td>Swag</td>
+			<td>Blog</td>
+		</tr>
+		</table>
+		<p>It’s good to have information organized.</p>
+	</div></section>
+	<section class="slide cover" id="Picture"><div>
+		<h2>API monitoring</h2>
+		<img src="pictures/picture.jpg" alt="">
+		<style>
+			#Picture h2 {
+				color:#FFF;
+				}
+		</style>
+	</div></section>
+
+-->
+
+	<section class="slide longcode"><div>
+		<h2>Vas zanimajo RTVSLO API-ji?</h2>
+		<p>Pošljite naslednje podatke na mmc@rtvslo.si</p>
+		<ul>
+			<li>Vaše ime / kontakt podjetja</li>
+			<li>Opis projekta pri katerem bi uporabljali API-je</li>
+			<li>Kateri APIji vas zanimajo?</li>
+		</ul>
+		<p class="note">Lahko pa predlagate tudi kak nov API, ki bi ga radi imeli</p>
+
+	</div></section>
+
+	<section class="slide shout"><div>
+		<h2>Vprašanja?</h2>
+	</div></section>
+<!--
+	<section class="slide"><div>
+		<h2>Inner Navigation</h2>
+		<ol>
+			<li>Lets you reveal list items one by one</li>
+			<li class="next">To keep some key points</li>
+			<li class="next">In secret from audience</li>
+			<li class="next">But it will work only once</li>
+			<li class="next">Nobody wants to see the same joke twice</li>
+		</ol>
+	</div></section>
+	<section class="slide shout" id="SeeMore"><div>
+		<h2><img src="pictures/logo.svg" alt=""> <a href="https://github.com/shower/shower">See more on GitHub</a></h2>
+		<style>
+			#Picture h2 {
+				color:#FFF;
+				}
+			#SeeMore h2 {
+				font-size:100px
+				}
+			#SeeMore img {
+				width:0.72em;
+				height:0.72em;
+				}
+		</style>
+	</div></section>
+
+	-->
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<script src="d3-cloud/lib/d3/d3.js"></script>
+	<script src="d3-cloud/d3.layout.cloud.js"></script>
+
+<script>
+
+  var wordlists = {
+	// 2013
+	".wordlist1": []
+			.concat(["Apache", "MySQL", "PHP"].map(function(string) { return {text: string, size: 50}; }))
+			.concat(["Ganglia", "JavaScript", "Perl", "Bash", "CVS", "phpMyAdmin"].map(function(string) { return {text: string, size: 35}; }))
+	,
+	// 2004-2005
+	".wordlist2": []
+			.concat(["Apache", "MySQL", "PHP", "NFS", "Pound"].map(function(string) { return {text: string, size: 45}; }))
+			.concat(["Ganglia", "Prototype.js", "JavaScript", "Perl", "Bash"].map(function(string) { return {text: string, size: 30}; }))
+			.concat(["rdist", "crontab", "samba/cifs", "glftpd", "subversion", "phpMyAdmin", "mod_backhand"].map(function(string) { return {text: string, size: 15}; }))
+	,
+	// 2005-2008
+	".wordlist3": []
+			.concat(["Lighttpd", "MySQL", "PHP", "NFS", "Pound"].map(function(string) { return {text: string, size: 45}; }))
+			.concat(["MiniTPL", "Ganglia", "Prototype.js", "Memcached", "ShareDance", "JavaScript", "Nginx", "Perl", "Bash"].map(function(string) { return {text: string, size: 30}; }))
+			.concat(["rdist", "Munin", "crontab", "haproxy", "samba/cifs", "glftpd", "phpMyAdmin", "subversion"].map(function(string) { return {text: string, size: 15}; }))
+	,
+	// 2008-2011
+	".wordlist4": []
+			.concat(["Nginx", "MySQL", "PHP"].map(function(string) { return {text: string, size: 45}; }))
+			.concat(["MiniTPL", "Ganglia", "NFS", "Prototype.js", "crontab", "JavaScript", "Perl", "Bash", "Lighttpd"].map(function(string) { return {text: string, size: 30}; }))
+			.concat(["rsync", "Munin", "samba/cifs", "haproxy", "Memcached", "glftpd", "phpMyAdmin", "git"].map(function(string) { return {text: string, size: 15}; }))
+	,
+	// 2011-
+	".wordlist5": []
+			.concat(["Nginx", "MySQL", "PHP", "LUA", "Composer", "Redis"].map(function(string) { return {text: string, size: 45}; }))
+			.concat(["MiniTPL", "Ganglia", "Node.js", "Docker", "Shipyard", "SphinxSearch", "crontab", "PostgreSQL", "ElasticSearch", "ExpressJS", "Lucene", "Cassandra", "NFS", "JavaScript", "git", "rsync", "lesscss"].map(function(string) { return {text: string, size: 26}; }))
+			.concat(["bind", "Munin", "courier", "logstash", "kibana", "samba/cifs", "Perl", "Bash", "haproxy", "glftpd", "lighttpd", "phpMyAdmin", "npm", "golang", "d3.js", "Angular", "Memcached"].map(function(string) { return {text: string, size: 15}; }))
+  };
+
+	var draw = function(className, words) {
+	    d3.select(className).append("svg")
+	        .attr("width", 720)
+	        .attr("height", 300)
+	      .append("g")
+	        .attr("transform", "translate(360,150)")
+	      .selectAll("text")
+	        .data(words)
+	      .enter().append("text")
+	        .style("font-size", function(d) { return d.size + "px"; })
+	        .style("font-family", "Impact")
+	        .style("fill", function(d, i) { return fill(i); })
+	        .attr("text-anchor", "middle")
+	        .attr("transform", function(d) {
+	          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+	        })
+	        .text(function(d) { return d.text; });
+	};
+
+	var randomRotate=d3.scale.linear().domain([0,1]).range([-30,30]);
+
+	for (var key in wordlists) {
+		var words = wordlists[key];
+		var fill = d3.scale.category20();
+
+		  d3.layout.cloud().size([720, 300])
+		      .words(words)
+		      .padding(5)
+		      .rotate(function() { return randomRotate(Math.random()); })
+		      .font("Impact")
+		      .fontSize(function(d) { return d.size; })
+		      .on("end", function(wordlist) { draw(key, wordlist); })
+		      .start();
+
+	}
+
+</script>
+
+
+	<!-- Copyright © 2014 Yours Truly, Famous Inc. -->
+	<!-- Photos by John Carey, fiftyfootshadows.net -->
+</body>
+</html>

@@ -130,7 +130,7 @@ api.UpdateContents("sticker", function(val) {
 
 
 	var title = $(".twitter-card_bottom h1");
-	var offset = parseInt(((title.parent.height() - title.height()) / 2), 10);
+	var offset = ((title.parent.height() - title.height()) / 2);
 	title.css("margin", offset + "px 0 0 0");
 
 });

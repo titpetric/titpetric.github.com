@@ -109,13 +109,24 @@ window.api.UpdateContents = function(parameter, selector) {
 
 api.UpdateContents("title", ".twitter-card_bottom h1");
 api.UpdateContents("twitter", ".twitter-card_author__link");
-api.UpdateContents("avatar", function(val) { if (val==='none') { return; } $('.twitter-card_author img').attr("src", val); });
-api.UpdateContents("sticker", function(val) { if (val==='none') { $('.twitter-card_sticker').remove(); } else { $('.twitter-card_sticker img').attr("src", val) } });
+api.UpdateContents("avatar", function(val) {
+	if (val==="none") {
+		return;
+	}
+	$(".twitter-card_author img").attr("src", val);
+});
+api.UpdateContents("sticker", function(val) {
+	if (val==="none") {
+		$(".twitter-card_sticker").remove();
+	} else {
+		$(".twitter-card_sticker img").attr("src", val);
+	}
+});
 
 $(function() {
-	var title = $('.twitter-card_bottom h1');
+	var title = $(".twitter-card_bottom h1");
 	var offset = ((200 - title.height()) / 2);
-	title.css('margin-top', offset + "px");
+	title.css("margin-top", offset + "px");
 });
 
 </script>

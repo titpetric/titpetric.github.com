@@ -95,19 +95,22 @@ window.api.getUrlVar = function(key) {
 
 window.api.UpdateContents = function(parameter, selector) {
 	var value = api.getUrlVar(parameter);
+	if (typeof selector === "function") {
+		if (value === '') {
+			value = 'none';
+		}
+		return selector(decodeURIComponent(value));
+	}
 	if (value === '') {
 		return;
-	}
-	if (typeof selector === "function") {
-		return selector(decodeURIComponent(value));
 	}
 	$(selector).html(decodeURIComponent(value));
 };
 
 api.UpdateContents("title", ".twitter-card_bottom h1");
 api.UpdateContents("twitter", ".twitter-card_author__link");
-api.UpdateContents("avatar", function(val) { $('.twitter-card_author img').attr("src", val); });
-api.UpdateContents("sticker", function(val) { if (val==='' || val==='none') { $('.twitter-card_sticker').remove(); } else { $('.twitter-card_sticker img').attr("src", val) } });
+api.UpdateContents("avatar", function(val) { if (val==='none') { return; } $('.twitter-card_author img').attr("src", val); });
+api.UpdateContents("sticker", function(val) { if (val==='none') { $('.twitter-card_sticker').remove(); } else { $('.twitter-card_sticker img').attr("src", val) } });
 
 $(function() {
 	var title = $('.twitter-card_bottom h1');

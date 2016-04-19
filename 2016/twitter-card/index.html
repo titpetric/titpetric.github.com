@@ -107,6 +107,8 @@ window.api.UpdateContents = function(parameter, selector) {
 	$(selector).html(decodeURIComponent(value));
 };
 
+$(function() {
+
 api.UpdateContents("title", ".twitter-card_bottom h1");
 api.UpdateContents("twitter", ".twitter-card_author__link");
 api.UpdateContents("avatar", function(val) {
@@ -123,7 +125,7 @@ api.UpdateContents("sticker", function(val) {
 	}
 });
 
-$(function() {
+
 	var title = $(".twitter-card_bottom h1");
 	var offset = ((200 - title.height()) / 2);
 	title.css("margin-top", offset + "px");

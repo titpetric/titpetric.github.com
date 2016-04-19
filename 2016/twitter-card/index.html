@@ -83,7 +83,7 @@ h1 {
 		</div>
 	</div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.slim.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 <script>
 
 window.api = { 'link_language': '/' };
@@ -96,12 +96,12 @@ window.api.getUrlVar = function(key) {
 window.api.UpdateContents = function(parameter, selector) {
 	var value = api.getUrlVar(parameter);
 	if (typeof selector === "function") {
-		if (value === '') {
-			value = 'none';
+		if (value === "") {
+			value = "none";
 		}
 		return selector(decodeURIComponent(value));
 	}
-	if (value === '') {
+	if (value === "") {
 		return;
 	}
 	$(selector).html(decodeURIComponent(value));

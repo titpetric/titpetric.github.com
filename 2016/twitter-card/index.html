@@ -1,0 +1,118 @@
+<link href="https://fonts.googleapis.com/css?family=Cabin:400,600" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+<style type="text/css">
+body,html {
+	padding: 0;
+	margin: 0;
+}
+.twitter-card {
+	width: 1200px;
+	height: 630px;
+	background: #ccc url(https://source.unsplash.com/category/buildings/1200x630) top left no-repeat;
+}
+.twitter-card_wrap {
+	position: relative;
+	height: 630px;
+}
+.twitter-card_bottom {
+	background: rgba(224,224,224,0.7);
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 200px;
+}
+.twitter-card_author {
+	width: 350px;
+	text-align: center;
+	position: relative;
+	top: -80px;
+	float: right;
+}
+.twitter-card_author__avatar {
+	width: 160px;
+	height: 160px;
+	border: 7px solid #fff;
+	border-radius: 50%;
+	margin: 0 0 30px 0;
+}
+.twitter-card_author__link {
+	display: block;
+	font-family: Lora;
+	font-size: 22px;
+	font-weight: 700;
+	font-style: italic;
+	text-decoration: none;
+	color: #36465D;
+}
+.twitter-card_sticker {
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	padding-top: 100px;
+}
+.twitter-card_sticker img {
+	-webkit-filter: drop-shadow(0px 0px 20px rgba(0,0,0,0.75));
+	width: 600px;
+}
+h1 {
+	padding: 0 0 0 40px;
+	margin: 50px 0 0 0;
+	line-height: 1;
+	float: left;
+	width: 700px;
+	font-family: Cabin;
+	font-weight: 600;
+	font-size: 50px;
+	color: #36465D;
+}
+</style>
+<div class="twitter-card twitter-card__horizontal">
+	<div class="twitter-card_wrap">
+		<div class="twitter-card_sticker">
+			<img src="stickers/docker.png" alt=""/>
+		</div>
+		<div class="twitter-card_bottom">
+			<h1>Lorem ipsum dolor sit amet, bacon est</h1>
+			<div class="twitter-card_author">
+				<img src="img/avatar.jpg" class="twitter-card_author__avatar"/>
+				<a href="https://twitter.com/TitPetric" class="twitter-card_author__link">@LoremIpsum</a>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.slim.js"></script>
+<script>
+
+window.api = { 'link_language': '/' };
+
+window.api.getUrlVar = function(key) {
+        var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
+        return result && result[1] || "";
+};
+
+window.api.UpdateContents = function(parameter, selector) {
+	var value = api.getUrlVar(parameter);
+	if (value === '') {
+		return;
+	}
+	if (typeof selector === "function") {
+		return selector(decodeURIComponent(value));
+	}
+	$(selector).html(decodeURIComponent(value));
+};
+
+api.UpdateContents("title", ".twitter-card_bottom h1");
+api.UpdateContents("twitter", ".twitter-card_author__link");
+api.UpdateContents("avatar", function(val) { $('.twitter-card_author img').attr("src", val); });
+api.UpdateContents("sticker", function(val) { if (val==='' || val==='none') { $('.twitter-card_sticker').remove(); } else { $('.twitter-card_sticker img').attr("src", val) } });
+
+$(function() {
+	var title = $('.twitter-card_bottom h1');
+	var offset = ((200 - title.height()) / 2);
+	title.css('margin-top', offset + "px");
+});
+
+</script>

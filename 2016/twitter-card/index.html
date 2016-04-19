@@ -89,13 +89,21 @@ h1 {
 
 window.api = { 'link_language': '/' };
 
+window.api.URI = new URI(document.location.search);
+
 window.api.getUrlVar = function(key) {
-        var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
-        return result && result[1] || "";
+	var vars = api.URI.query(true);
+	if (key in vars) {
+		return vars[key];
+	}
+	return false;
 };
 
 window.api.UpdateContents = function(parameter, selector) {
 	var value = api.getUrlVar(parameter);
+	if (value === false) {
+		return;
+	}
 	if (typeof selector === "function") {
 		return selector(decodeURIComponent(value));
 	}

@@ -78,7 +78,7 @@ h1 {
 			<img src="stickers/docker.png" alt=""/>
 		</div>
 		<div class="twitter-card_bottom">
-			<h1>Lorem ipsum dolor sit amet, bacon est</h1>
+			<h1>Lorem ipsum dolor sit amet</h1>
 			<div class="twitter-card_author">
 				<img src="img/avatar.jpg" class="twitter-card_author__avatar"/>
 				<a href="https://twitter.com/TitPetric" class="twitter-card_author__link">@LoremIpsum</a>
@@ -113,8 +113,6 @@ window.api.UpdateContents = function(parameter, selector) {
 	$(selector).html(decodeURIComponent(value));
 };
 
-$(function() {
-
 api.UpdateContents("title", ".twitter-card_bottom h1");
 api.UpdateContents("twitter", ".twitter-card_author__link");
 api.UpdateContents("avatar", function(val) {
@@ -128,11 +126,10 @@ api.UpdateContents("sticker", function(val) {
 	}
 });
 
-
+$(window).load(function() {
 	var title = $(".twitter-card_bottom h1");
 	var offset = ((title.parent().height() - title.height()) / 2);
 	title.css("margin", offset + "px 0 0 0");
-
 });
 
 </script>

@@ -11,7 +11,6 @@ body,html {
 .twitter-card {
 	width: 1200px;
 	height: 630px;
-	background: #ccc url(https://source.unsplash.com/random/1200x630) top left no-repeat;
 }
 .twitter-card_wrap {
 	position: relative;
@@ -51,16 +50,23 @@ body,html {
 	color: #36465D;
 }
 .twitter-card_sticker {
-	position: relative;
+	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
+	height: 430px;
 	text-align: center;
-	padding-top: 100px;
 }
 .twitter-card_sticker img {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 	-webkit-filter: drop-shadow(0px 0px 20px rgba(0,0,0,0.75));
-	width: 600px;
+	max-width: 800px;
+	max-height: 300px;
 }
 h1 {
 	padding: 0 0 0 40px;
@@ -119,6 +125,9 @@ api.UpdateContents("title", ".twitter-card_bottom h1");
 api.UpdateContents("twitter", ".twitter-card_author__link");
 api.UpdateContents("avatar", function(val) {
 	$(".twitter-card_author img").attr("src", val);
+});
+api.UpdateContents("background", function(val) {
+	$(".twitter-card").css("background", val);
 });
 api.UpdateContents("sticker", function(val) {
 	if (val==="none") {

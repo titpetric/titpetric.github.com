@@ -1,0 +1,2 @@
+node index.js > index.html
+lessc index.less > index.css

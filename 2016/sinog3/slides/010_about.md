@@ -4,4 +4,4 @@
 * Book author, API Foundations in Go
 * MMC RTV Slovenia, Lekarna Ljubljana, Kompas
 * Custom CRM and CMS solutions
-* Infrastructure engineer (golang, php, docker, DBA)
+* golang, php, docker, mysql dba, node,...

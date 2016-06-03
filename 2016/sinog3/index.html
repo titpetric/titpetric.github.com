@@ -1,0 +1,238 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Docker - what it is, what it&#39;s not</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="index.css">
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Docker - what it is, what it&#39;s not</h1>
+		<p><a href="https://twitter.com/TitPetric">Tit Petrič, Monotek d.o.o.</a></p>
+	</header>
+
+	
+
+	<section class="slide_000_cover slide cover"><div>
+		<h2>Docker - what it is, what it's not</h2>
+<p><a href="https://twitter.com/TitPetric">Tit Petrič, @TitPetric</a></p>
+<p><img src="pictures/cover.jpg" alt=""></p>
+
+	</div></section>
+
+	
+
+	<section class="slide_010_about slide"><div>
+		<h2>Who am I?</h2>
+<ul>
+<li>Monotek d.o.o, Dev &amp; Ops</li>
+<li>Book author, API Foundations in Go</li>
+<li>MMC RTV Slovenia, Lekarna Ljubljana, Kompas</li>
+<li>Custom CRM and CMS solutions</li>
+<li>golang, php, docker, mysql dba, node,...</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_020_about_more slide"><div>
+		<h2>Who am I? (cont.)</h2>
+<ul>
+<li>Engineering blog (Golang, Docker, DevOps...) - https://scene-si.org</li>
+<li>API Foundations in Go - https://leanpub.com/api-foundations</li>
+<li>Open Source - https://github.com/titpetric</li>
+<li>Twitter - https://github.com/titpetric</li>
+<li>LinkedIn - https://www.linkedin.com/in/titpetric</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_030_title slide"><div>
+		<h1>Docker</h1>
+<figure class="large">
+	<blockquote>
+		<p>Study the past if you would define the future.</p>
+	</blockquote>
+	<figcaption>― Confucius</figcaption>
+</figure>
+
+	</div></section>
+
+	
+
+	<section class="slide_040_chroot slide"><div>
+		<h2>Not a virtual machine</h2>
+<h3>Remember Chroot?</h3>
+<ul>
+<li>exists since forever (when unix was all there was times)</li>
+<li>&quot;filesystem&quot; &quot;isolation&quot; (not really tho)</li>
+<li>but then there's memory, cpu, network,...</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_050_cgroups slide"><div>
+		<h2>Not a virtual machine</h2>
+<h3>cgroups (control groups, resource mgmt)</h3>
+<ul>
+<li>control cpu time share, used cores, affinity</li>
+<li>priority - cpu, disk i/o</li>
+<li>accounting - see what you use</li>
+<li>In the linux kernel since 2006-2007</li>
+<li>Initial effort credited to Google</li>
+<li>Paul Menage, Rohit Seth</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_060_namespace slide"><div>
+		<h2>Not a virtual machine</h2>
+<h3>namespaces (isolation)</h3>
+<ul>
+<li>PID - Process visibility</li>
+<li>NET - Network isolation</li>
+<li>MNT - Mount point control</li>
+<li>IPC - Inter-process communication</li>
+<li>USER - User permissions and mapping</li>
+<li>UTS - change hostname/domainname</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_070_rob_pike slide"><div>
+		<h2>Rob Pike</h2>
+<ul>
+<li>Plan 9, Bell labs, namespaces in 1992</li>
+<li>Since 2005* at Google, co-created Golang '06</li>
+<li>Google main contributor of cgroups in '06</li>
+<li>Docker is built with Golang</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_080_so_what slide"><div>
+		<h2>Docker</h2>
+<h3>So what is it not?</h3>
+<ul>
+<li>It's not an operating system</li>
+<li>It's not a virtual machine</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_090_duck slide"><div>
+		<h2>Docker</h2>
+<h3>So what is it <strike>not</strike>?</h3>
+<ul>
+<li>It's not an operating system</li>
+<li>It's not a virtual machine</li>
+<li>... but ..</li>
+<li>It's kinda like an operating system,</li>
+<li>And resource limits are managed like a VM,</li>
+<li>It looks and talks like a duck, not a duck</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_100_specificity_shout slide shout"><div>
+		<h2>Let's get specific</h2>
+
+	</div></section>
+
+	
+
+	<section class="slide_110_disk slide"><div>
+		<h2>Let's get specific</h2>
+<h3>Resource usage: disk</h3>
+<div class="bar red">Virtual Machine: ~10GB - 100GB (OS only, low data)</div>
+<div class="bar green">Docker Image: ~10MB - 100MB - 1GB (Image size, no data)</div>
+<ul>
+<li>Docker: True dynamically expanding data (not virtual size of FS)</li>
+<li>Image layers: &quot;base&quot; images can be reused</li>
+<li>Docker: 1 Application*, VM: 1 Operating system</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_120_software slide"><div>
+		<h2>This is docker</h2>
+<div class="image-slide"></div>
+<p><small>Source: Explaining docker images using Lego, by Graham Dumpleton</small></p>
+
+	</div></section>
+
+	
+
+	<section class="slide_130_software slide"><div>
+		<h2>This is a virtual machine</h2>
+<div class="image-slide"></div>
+<p><small>Source: Machine Made of Lego Builds Anything You Want — Out of Lego - Wired (MakerLegoBot)</small></p>
+
+	</div></section>
+
+	
+
+	<section class="slide_140_contract slide"><div>
+		<h2>Docker</h2>
+<figure class="medium">
+	<blockquote>
+		<p>Docker is the contract between Developers and Operations. Developers and Operations often have very different attitudes when it comes to choosing tools and environments.</p>
+	</blockquote>
+	<figcaption>― Anders Janmyr</figcaption>
+</figure>
+
+	</div></section>
+
+	
+
+	<section class="slide_150_practice slide"><div>
+		<h2>Docker</h2>
+<ul>
+<li>Microservices based approach, the S in SOLID</li>
+<li>Solves version dependency hell, uses <em>whatever</em></li>
+<li>Easy throw-away environments</li>
+<li>Migration enabled - on premise, EC2, Azure...</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_160_questions_shout slide shout"><div>
+		<h2>Questions?</h2>
+<h3>Twitter: <a href="https://twitter.com/TitPetric">Tit Petrič, @TitPetric</a></h3>
+
+	</div></section>
+
+	
+
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2014 Yours Truly, Famous Inc. -->
+	<!-- Photos by John Carey, fiftyfootshadows.net -->
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "sinog3",
+  "version": "1.0.0",
+  "description": "Follow [@shower_me](https://twitter.com/shower_me) for support and updates",
+  "main": "index.js",
+  "dependencies": {
+    "ejs": "^2.4.2",
+    "glob": "^7.0.3",
+    "markdown-it": "^6.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

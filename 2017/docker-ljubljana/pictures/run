@@ -1,0 +1,6 @@
+#!/bin/bash
+PHOTO="http://unsplash.com/photos/l5Tzv1alcps/download"
+PHOTO="https://unsplash.com/photos/FtRkRespN24/download"
+PHOTO_ID=$(echo $PHOTO | sed -e "s/\// /g" | awk "{print \$4}")
+wget https://source.unsplash.com/$PHOTO_ID/1290x970
+mv 1290x970 cover.jpg

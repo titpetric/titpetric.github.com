@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Docker - 1000 hairy containers</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="index.css">
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Docker - 1000 hairy containers</h1>
+		<p><a href="https://twitter.com/TitPetric">Tit Petrič, Monotek d.o.o.</a></p>
+	</header>
+
+	
+
+	<section class="slide_000_cover slide cover"><div>
+		<h2>Docker - 1000 hairy containers</h2>
+<p><a href="https://twitter.com/TitPetric">Tit Petrič, @TitPetric</a></p>
+<p><img src="pictures/cover.jpg" alt=""></p>
+
+	</div></section>
+
+	
+
+	<section class="slide_010_about slide"><div>
+		<h2>Who am I?</h2>
+<ul>
+<li>Monotek d.o.o, Dev &amp; Ops</li>
+<li>Book author,
+<ul>
+<li>API Foundations in Go</li>
+<li>12 Factor Apps with Docker and Go</li>
+</ul>
+</li>
+<li>MMC RTV Slovenia, Lekarna Ljubljana, Kompas</li>
+<li>Custom CRM and CMS solutions</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_020_about_more slide"><div>
+		<h2>Who am I? (cont.)</h2>
+<ul>
+<li>Engineering blog - https://scene-si.org</li>
+<li>Leanpub Books - https://leanpub.com/u/titpetric</li>
+<li>Open Source - https://github.com/titpetric</li>
+<li>Twitter - https://github.com/titpetric</li>
+<li>LinkedIn - https://www.linkedin.com/in/titpetric</li>
+<li>Everything else - https://scene-si.org/about</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_030_docker slide"><div>
+		<h2>Docker</h2>
+<ul>
+<li>one host times X</li>
+<li>CLI on each host</li>
+<li>&quot;here's the water now swim&quot;</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_040_swarm slide"><div>
+		<h2>Docker Swarm</h2>
+<ul>
+<li>one host times X</li>
+<li>CLI on manager hosts</li>
+<li>orchestration</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_041_swarm slide"><div>
+		<h2>Docker Swarm (cond.).</h2>
+<ul>
+<li>handle manager failure (RAFT)</li>
+<li>container failure rescheduling</li>
+<li>HEALTHCHECK for the win*</li>
+<li>this thing has secrets management</li>
+</ul>
+<p><small>* well, after patch from issue #31342 makes it upstream :)</small></p>
+
+	</div></section>
+
+	
+
+	<section class="slide_050_start slide"><div>
+		<h1>Let's start</h1>
+<div class="image-slide"></div>
+	</div></section>
+
+	
+
+	<section class="slide_051_run_network slide"><div>
+		<h2>Let's start: network</h2>
+<pre><code># docker network create \
+  --driver overlay \
+  --subnet 10.0.0.0/20 \
+  --attachable \
+  party-swarm
+q3l72085za9s20fwxfix83i7k
+</code></pre>
+
+	</div></section>
+
+	
+
+	<section class="slide_052_prepare_container slide"><div>
+		<h2>Let's start: service</h2>
+<pre><code>capacity = available resources / resource usage per unit
+</code></pre>
+<ul>
+<li>RAM = (~6gb / 6mb = 1000 containers),</li>
+<li>DISK = (~10GB / 10MB = 1000 containers),</li>
+<li>CPU = run a benchmark, will you?</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_053_run_service slide"><div>
+		<h2>Let's start: service</h2>
+<pre><code># docker service create \
+  --replicas 1000 \
+  --network party-swarm \
+  --update-parallelism 5 \
+  --name sonyflake \
+  -p 80:80 titpetric/sonyflake
+je2np5ab1s6ztf55qj62im72g
+</code></pre>
+
+	</div></section>
+
+	
+
+	<section class="slide_060_setup_network slide"><div>
+		<h2>ARP cache (IP/MAC) will kill your swarm</h2>
+<p><code>neighbour: arp_cache: neighbor table overflow!</code></p>
+<div class="image-slide"></div>
+
+	</div></section>
+
+	
+
+	<section class="slide_070_setup_network_math slide"><div>
+		<h2>Setting it up: Network</h2>
+<p>1000 containers = ~5000 IPs</p>
+<ul>
+<li>egress/docker_gwbridge gives 1 IP</li>
+<li>custom network gives 1 IP (party-swarm)</li>
+<li>port forwarding gives 1 IP (ingress network)</li>
+<li>VIP mode gives 1 IP per network (2x)</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_080_setup_network_sysctl slide"><div>
+		<h2>Setting it up: Network</h2>
+<pre><code>sysctl -w net.ipv4.neigh.default.gc_thresh1=8096
+sysctl -w net.ipv4.neigh.default.gc_thresh2=12288
+sysctl -w net.ipv4.neigh.default.gc_thresh3=16384
+</code></pre>
+<ol>
+<li>The minimum number of entries to keep in the ARP cache.</li>
+<li>The soft maximum number of entries to keep in the ARP cache.</li>
+<li>The hard maximum number of entries to keep in the ARP cache.</li>
+</ol>
+
+	</div></section>
+
+	
+
+	<section class="slide_082_retry slide"><div>
+		<h2>Let's start: service</h2>
+<div class="image-slide"></div>
+
+	</div></section>
+
+	
+
+	<section class="slide_083_conductor slide"><div>
+		<pre><code># docker service ls
+ID            NAME       MODE        REPLICAS
+je2np5ab1s6z  sonyflake  replicated  371/1000
+</code></pre>
+<div class="image-slide"></div>
+
+	</div></section>
+
+	
+
+	<section class="slide_084_party slide"><div>
+		<pre><code># docker service ls
+ID            NAME       MODE        REPLICAS
+je2np5ab1s6z  sonyflake  replicated  1000/1000
+</code></pre>
+<div class="image-slide"></div>
+
+	</div></section>
+
+	
+
+	<section class="slide_090_what_now_shout slide shout"><div>
+		<h2>What now?</h2>
+
+	</div></section>
+
+	
+
+	<section class="slide_100_chaos_monkey slide"><div>
+		<h2>Docker Swarm + Chaos Monkey</h2>
+<div class="image-slide"></div>
+<p class="tac"><a href="https://github.com/titpetric/docker-chaos-monkey">https://github.com/titpetric/docker-chaos-monkey</a></p>
+
+	</div></section>
+
+	
+
+	<section class="slide_120_orchestration slide"><div>
+		<h2>Docker Swarm + Chaos Monkey</h2>
+<div class="image-slide"></div>
+	</div></section>
+
+	
+
+	<section class="slide_130_final_thoughts slide"><div>
+		<h2>Final thoughts</h2>
+<ul>
+<li>high traffic edges need sysctl &amp;&amp; swarm doesn't have it</li>
+<li>chaos monkey could be systematic (orchestrate failure!)</li>
+<li>reliable software is hard, 12FA helps</li>
+</ul>
+
+	</div></section>
+
+	
+
+	<section class="slide_160_questions_shout slide shout"><div>
+		<h2>Questions?</h2>
+<h3>Twitter: <a href="https://twitter.com/TitPetric">Tit Petrič, @TitPetric</a></h3>
+
+	</div></section>
+
+	
+
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2014 Yours Truly, Famous Inc. -->
+	<!-- Photos by John Carey, fiftyfootshadows.net -->
+</body>
+</html>
